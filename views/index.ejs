@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blink Chat App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>All Chats! </h2>
+    <form method="GET" action="http://localhost:8080/chats/new">
+        <button>New Chat</button>
+    </form>
+    <br>
+    <br>
+    <%for(chat of chats) { %>
+          <div class="chat">
+            <p>From : <i><%=chat.from%></i></p>
+            <div class="msg">
+                <p>Message : <i><%=chat.msg%></i></i></p>
+                <br>
+                <form action="http://localhost:8080/chats/<%=chat._id%>/edit">
+                    <button>Edit</button>
+                </form>
+            </div>
+            <p>Recieved by : <i><%=chat.to%></i></i></p>
+            <hr/>
+            <p><%=chat.created_at.toString().split(" ")[4]%></p>
+            <p><%=chat.created_at.toString().split(" ").slice(0,4).join("-")%></p>
+            <br>
+            <form method="POST" action="http://localhost:8080/chats/<%=chat._id%>?_method=DELETE">
+                <button>Delete</button>
+            </form>
+          </div>
+
+          <br>
+          <br>
+    <%}%>
+     
+</body>
+</html>
